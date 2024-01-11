@@ -2,7 +2,7 @@ Summary: A network traffic monitoring tool
 Name: tcpdump
 Epoch: 14
 Version: 4.99.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD with advertising
 URL: http://www.tcpdump.org
 Requires(pre): shadow-utils
@@ -32,7 +32,7 @@ Install tcpdump if you need a program to monitor network traffic.
 %autosetup -a 1 -S git
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS $(getconf LFS_CFLAGS) -fno-strict-aliasing"
+export CFLAGS="$RPM_OPT_FLAGS $(getconf LFS_CFLAGS) -fno-strict-aliasing -DGUESS_TSO"
 
 pushd %{tcpslice_dir}
 # update config.{guess,sub}
@@ -81,6 +81,9 @@ exit 0
 %{_mandir}/man8/tcpdump.8*
 
 %changelog
+* Wed May 24 2023 Michal Ruprich <mruprich@redhat.com> - 14:4.99.0-7
+- Resolves: #2188429 - enable GUESS_TSO for large packets
+
 * Tue Aug 10 2021 Mohan Boddu <mboddu@redhat.com> - 14:4.99.0-6
 - Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
   Related: rhbz#1991688
