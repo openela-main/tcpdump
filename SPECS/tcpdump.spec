@@ -2,7 +2,7 @@ Summary: A network traffic monitoring tool
 Name: tcpdump
 Epoch: 14
 Version: 4.9.3
-Release: 3%{?dist}
+Release: 3%{?dist}.1
 License: BSD with advertising
 URL: http://www.tcpdump.org
 Group: Applications/Internet
@@ -26,6 +26,7 @@ Patch0013:      0013-tcpslice-stdlib.patch
 Patch0014:      0014-enhance-mptcp.patch
 Patch0015:      0015-CVE-2020-8037.patch
 Patch0016:      0016-direction-for-any.patch
+Patch0017:      0017-CVE-2021-41043.patch
 
 %define tcpslice_dir tcpslice-1.2a3
 
@@ -91,6 +92,9 @@ exit 0
 %{_mandir}/man8/tcpdump.8*
 
 %changelog
+* Fri Jan 05 2024 Michal Ruprich <mruprich@redhat.com> - 14:4.9.3-3.1
+- Resolves: RHEL-20814 - tcpslice: use-after-free in extract_slice()
+
 * Mon Jan 10 2022 Michal Ruprich <mruprich@redhat.com> - 14:4.9.3-3
 - Resolves: #2005451 - tcpdump support for direction and interface needed in RHEL8
 
