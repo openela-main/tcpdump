@@ -2,7 +2,7 @@ Summary: A network traffic monitoring tool
 Name: tcpdump
 Epoch: 14
 Version: 4.99.0
-Release: 7%{?dist}
+Release: 7%{?dist}.1
 License: BSD with advertising
 URL: http://www.tcpdump.org
 Requires(pre): shadow-utils
@@ -17,6 +17,7 @@ Patch0002:      0002-Use-getnameinfo-instead-of-gethostbyaddr.patch
 Patch0003:      0003-Drop-root-priviledges-before-opening-first-savefile-.patch
 Patch0007:      0007-Introduce-nn-option.patch
 Patch0009:      0009-Change-n-flag-to-nn-in-TESTonce.patch
+Patch0010:      0010-CVE-2021-41043.patch
 
 %define tcpslice_dir tcpslice-1.3
 
@@ -81,6 +82,9 @@ exit 0
 %{_mandir}/man8/tcpdump.8*
 
 %changelog
+* Thu Jan 18 2024 Michal Ruprich <mruprich@redhat.com> - 14:4.99.0-7.1
+- Resolves: RHEL-21789 - tcpslice: use-after-free in extract_slice()
+
 * Wed May 24 2023 Michal Ruprich <mruprich@redhat.com> - 14:4.99.0-7
 - Resolves: #2188429 - enable GUESS_TSO for large packets
 
